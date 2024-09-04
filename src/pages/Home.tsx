@@ -9,7 +9,7 @@ import show1 from "../assets/images/show1.png";
 import show2 from "../assets/images/show2.png";
 import show3 from "../assets/images/show3.png";
 import lock from "../assets/lock 01.svg";
-import logo2 from "../assets/Logo2.svg";
+import logo2 from "../assets/logo2.svg";
 import money from "../assets/money.svg";
 import Card from "../components/Card";
 import { Skeleton } from "../components/Loader";
