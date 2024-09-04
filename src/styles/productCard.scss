@@ -1,0 +1,67 @@
+.productCard {
+  width: 16.375rem; // 262px / 16
+  @include flex(column, flex-start, flex-start, 0);
+
+  .productImageWrapper {
+    border: 0.1px solid rgba(0, 0, 0, 0.077);
+    border-radius: 0.3125rem;
+    position: relative;
+    display: flex;
+    transition: all ease 0.3s;
+    width: 16.375rem; // 262px / 16
+    height: 21.875rem; // 350px / 16
+
+    > div {
+      width: 100%;
+      position: absolute;
+      padding: 1rem;
+      height: 100%;
+      @include flex(column, space-between, space-between);
+
+      > div {
+        @include flex(row, space-between, flex-start);
+
+        > .extras {
+          @include flex(column, center, stretch, 0.5rem);
+          button {
+            @include btn(0.25rem 0.5rem, white, $black); // 4px 8px / 16
+            font-weight: 600;
+            border-radius: 0.3125rem; // 5px / 16
+          }
+          .btn2 {
+            background-color: $green;
+            color: white;
+          }
+        }
+
+        > img {
+          padding: 0.5rem; // 8px / 16
+          background-color: white;
+          border-radius: 6.25rem; // 100px / 16
+        }
+      }
+
+      > button {
+        @include btn(1rem, $black, white);
+        border-radius: 0.3125rem; // 5px / 16
+        font-size: 1rem;
+        display: none;
+      }
+    }
+  }
+
+  .details {
+    padding: 0.3125rem; // 5px / 16
+    @include flex(row, space-between, flex-end);
+    width: 100%;
+    font-size: 1.2rem;
+
+    span {
+      font-weight: 600;
+    }
+  }
+
+  &:hover .productImageWrapper > div > button {
+    display: block;
+  }
+}
