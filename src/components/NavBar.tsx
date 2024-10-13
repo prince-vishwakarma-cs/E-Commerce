@@ -63,11 +63,15 @@ const NavHeader = ({ user }: PropsType) => {
     }
   };
 
-
   const openDrawer = () => {
     dispatch(setIsDrawer(true));
     setExtrasOpen(false);
   };
+
+  const closeDrawer =() =>{
+    dispatch(setIsDrawer(false));
+    setExtrasOpen(false)
+  }
 
   return (
     <div
@@ -77,7 +81,7 @@ const NavHeader = ({ user }: PropsType) => {
     >
       <div className="nav-header__top">
         <div className="nav-header__logo">
-          <NavLink onClick={() => setExtrasOpen(false)} to="/">
+          <NavLink onClick={closeDrawer} to="/">
             Z<span style={{ color: "var(--black-100)" }}>ylaro</span>
             <span style={{ color: "var(--black-40)" }}>.</span>
           </NavLink>

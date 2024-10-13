@@ -27,7 +27,11 @@
     align-items: center;
     font-size: 1.4rem;
     font-weight: 700;
-  }
+
+    >.active{
+        color: $green;
+      }
+    }
 
   &__menu {
     margin-top: 1.5rem;
