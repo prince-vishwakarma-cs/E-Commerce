@@ -14,3 +14,7 @@ export interface CartReducerInitialState{
     total: number;
     shippingInfo: shippingInfo;
 }
+
+export interface MiscReducerInitialState{
+    navigationDrawer: boolean,
+}

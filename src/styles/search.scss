@@ -1,12 +1,14 @@
 .search-page {
   padding: 1rem;
   @include flex(row, flex-start, stretch, 2rem);
-  height: 90vh;
+  height: calc( 100vh - 51.2px);
   position: relative;
+  background-color: var(--white-100);
+  color: var(--black-100);
 
   aside {
     min-width: 20rem;
-    border-right: 2px solid rgba(154, 154, 154, 0.38);
+    border-right: 2px solid var(--primary-light);
     padding: 2rem;
     @include flex(column, flex-start, unset, 0.5rem);
     position: sticky;
@@ -33,10 +35,11 @@
         @include inputStyle(
           100%,
           0.75rem 1.2rem,
-          white,
-          3px solid rgb(108, 114, 117)
+          var(--white-100),
+          3px solid --black-40
         );
         border-radius: 10px;
+        color: var(--black-100);
       }
     }
   }
@@ -58,6 +61,7 @@
       font-size: 1.2rem;
       display: block;
       border-bottom: 2px solid rgba(154, 154, 154, 0.38);
+      color: var(--black-100);
     }
 
     .scrollable {

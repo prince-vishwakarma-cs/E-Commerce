@@ -49,8 +49,7 @@ function TableHOC<T extends object>(
 
     return (
       <div className={containerClassname}>
-        <h2 className="heading">{heading}</h2>
-
+        <span  className="dash-home-head">{heading}</span>
         <table className="table" {...getTableProps()}>
           <thead>
             {headerGroups.map((headerGroup) => (

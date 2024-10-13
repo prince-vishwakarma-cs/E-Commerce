@@ -104,13 +104,52 @@ const Search = () => {
         </div>
       </aside>
       <main>
-        <input
-          type="text"
-          placeholder="Search by name...."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
-        <div className="scrollable">
+  <input
+    type="text"
+    placeholder="Search by name...."
+    value={search}
+    onChange={(e) => setSearch(e.target.value)}
+  />
+
+  {/* Compact Filter and Sort */}
+  <div className="filter-contain">
+  <div className="filter-sort">
+    <div className="filter-item">
+      <h4>Sort by</h4>
+      <select value={sort} onChange={(e) => setSort(e.target.value)}>
+        <option value="">None</option>
+        <option value="asc">Low - High</option>
+        <option value="dsc">High - Low</option>
+      </select>
+    </div>
+
+    <div className="filter-item">
+      <h4>Category</h4>
+      <select value={category} onChange={(e) => setCategory(e.target.value)}>
+        <option value="">All</option>
+        {!loadingCategories &&
+          categoriesResponse?.categories.map((i) => (
+            <option key={i} value={i}>
+              {i}
+            </option>
+          ))}
+      </select>
+    </div>
+
+    <div className="price-range">
+      <h4>Max Price: {maxPrice || ""}</h4>
+      <input
+        type="range"
+        min={100}
+        max={100000}
+        value={maxPrice}
+        onChange={(e) => setMaxPrice(Number(e.target.value))}
+      />
+    </div>
+  </div>
+  </div>
+
+  <div className="scrollable">
           {
             productsLoading ? <Skeleton/> : (
               <div className="product-list">
@@ -152,7 +191,8 @@ const Search = () => {
             </article>
           )}
         </div>
-      </main>
+</main>
+
     </div>
   );
 };

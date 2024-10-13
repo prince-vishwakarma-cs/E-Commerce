@@ -25,7 +25,7 @@ const Card = ({
         <img
           className="p-image"
           style={{ objectFit: "contain", width: "100%", height: "100%" }}
-          src={`${import.meta.env.VITE_SERVER}/${photo}`}
+          src={photo}
           alt={image}
         />
         <div>

@@ -119,7 +119,7 @@ const Productmanagement = () => {
             <section>
               <strong>ID - {data?.product._id}</strong>
               <img
-                src={`${import.meta.env.VITE_SERVER}/${photo}`}
+                src={photo}
                 alt="Product"
               />
               <p>{name}</p>

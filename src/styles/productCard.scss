@@ -1,15 +1,18 @@
 .productCard {
-  width: 16.375rem; // 262px / 16
+  width: 100%; // Make the card width 100% of its container
+  max-width: 16.375rem; // Max width to control the size
   @include flex(column, flex-start, flex-start, 0);
+  aspect-ratio: 262 / 349;
+  height: 100%;
 
   .productImageWrapper {
-    border: 0.1px solid rgba(0, 0, 0, 0.077);
+    border: 0.1px solid var(--black-5);
     border-radius: 0.3125rem;
     position: relative;
     display: flex;
     transition: all ease 0.3s;
-    width: 16.375rem; // 262px / 16
-    height: 21.875rem; // 350px / 16
+    width: 100%; 
+    height: 100%;
 
     > div {
       width: 100%;
@@ -25,6 +28,7 @@
           @include flex(column, center, stretch, 0.5rem);
           button {
             @include btn(0.25rem 0.5rem, white, $black); // 4px 8px / 16
+            font-size: 0.875rem;
             font-weight: 600;
             border-radius: 0.3125rem; // 5px / 16
           }
@@ -35,16 +39,16 @@
         }
 
         > img {
-          padding: 0.5rem; // 8px / 16
+          padding: 0.5rem;
           background-color: white;
-          border-radius: 6.25rem; // 100px / 16
+          border-radius: 6.25rem;
         }
       }
 
       > button {
-        @include btn(1rem, $black, white);
+        @include btn(0.75rem 1.5rem, $black, white);
         border-radius: 0.3125rem; // 5px / 16
-        font-size: 1rem;
+        font-size: 0.875rem;
         display: none;
       }
     }

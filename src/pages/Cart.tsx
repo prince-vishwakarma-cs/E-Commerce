@@ -19,7 +19,7 @@ const Cart = () => {
     useSelector(
       (state: { cartReducer: CartReducerInitialState }) => state.cartReducer
     );
-    
+
   const dispatch = useDispatch();
 
   const [couponCode, setCouponCode] = useState("");
@@ -60,7 +60,6 @@ const Cart = () => {
           dispatch(discountApplied(0));
           dispatch(calculatePrice());
           setValidCode(false);
-          toast.error(e.response.data.message);
         });
       if (Math.random() > 0.5) setValidCode(true);
       else setValidCode(false);

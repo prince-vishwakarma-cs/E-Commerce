@@ -5,6 +5,7 @@ import { userReducer } from "./reducer/userSlice";
 import { cartReducer } from "./reducer/cartSlice";
 import { orderAPI } from "./api/orderAPI";
 import { dashboardAPI } from "./api/dashboardAPI";
+import miscSlice from "./reducer/miscSlice"
 
 export const server = import.meta.env.VITE_SERVER;
 
@@ -15,7 +16,8 @@ export const store = configureStore({
     [orderAPI.reducerPath]:orderAPI.reducer,
     [dashboardAPI.reducerPath]:dashboardAPI.reducer,
     [userReducer.reducerPath]: userReducer.reducer,
-    [cartReducer.reducerPath]:cartReducer.reducer
+    [cartReducer.reducerPath]:cartReducer.reducer,
+    misc: miscSlice.reducer
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()

@@ -89,7 +89,7 @@ const Customers = () => {
           action: (
             <button onClick={() => deleteHandler(i._id)}>
               <Trash2
-                style={user?._id === i._id ? { color: "black" } : {}}
+                style={user?._id === i._id ? { color: "var(--black-100)" } : {}}
               />
             </button>
           ),

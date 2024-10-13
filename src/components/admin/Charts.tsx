@@ -69,10 +69,21 @@ export const BarChart = ({
         grid: {
           display: false,
         },
+        border: {
+          display: false,  // Hide the y-axis line
+        },
+        ticks: {
+          color: "gray", // Set the y-axis label color here
+        },
       },
       x: {
         grid: {
           display: false,
+        },
+        border: {
+          display: false,  // Hide the y-axis line
+        },
+        ticks: {
         },
       },
     },
@@ -86,21 +97,26 @@ export const BarChart = ({
         data: data_1,
         backgroundColor: bgColor_1,
         barThickness: "flex",
-        barPercentage: 1,
+        barPercentage: 0.9,
         categoryPercentage: 0.4,
+        borderRadius: 5,
+        borderSkipped: false,
       },
       {
         label: title_2,
         data: data_2,
         backgroundColor: bgColor_2,
         barThickness: "flex",
-        barPercentage: 1,
+        barPercentage: 0.9,
+        borderRadius: 5,
         categoryPercentage: 0.4,
+        borderSkipped: false
       },
     ],
   };
 
-  return <Bar width={horizontal ? "200%" : ""} options={options} data={data} />;
+  return <Bar options={options} data={data} />;
+
 };
 
 interface DoughnutChartProps {

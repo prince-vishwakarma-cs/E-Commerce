@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 html {
   scroll-behavior: smooth;
   &::-webkit-scrollbar {
@@ -6,8 +10,54 @@ html {
 }
 
 :root {
-  line-height: 1.5;
-  font-weight: 400;
+  --black-100: rgba(28, 28, 28, 100%);
+  --black-40: rgba(28, 28, 28, 40%);
+  --black-20: rgba(28, 28, 28, 20%);
+  --black-10: rgba(28, 28, 28, 10%);
+  --black-5: rgba(28, 28, 28, 5%);
+
+  --white-100: rgba(255, 255, 255, 100%);
+  --white-40: rgba(255, 255, 255, 40%);
+  --white-20: rgba(255, 255, 255, 20%);
+  --white-10: rgba(255, 255, 255, 10%);
+  --white-5: rgba(255, 255, 255, 5%);
+
+  --primary-light: rgb(247, 249, 251);
+  --primary-brand: rgba(28, 28, 28);
+  --primary-purple: rgb(229, 236, 246);
+  --primary-blue: rgb(227, 245, 255, 100);
+
+  --secondary-cyan: rgba(168, 197, 218);
+  --secondary-green: rgb(161, 227, 203);
+  --secondary-blue: rgb(177, 227, 255);
+  --secondary-indigo: rgb(149, 164, 252);
+  --secondary-mint: rgb(186, 237, 189);
+  background-color: var(--white-100);
+}
+
+.light-theme {
+  --black-100: rgba(28, 28, 28, 100%);
+  --black-40: rgba(28, 28, 28, 40%);
+  --black-20: rgba(28, 28, 28, 20%);
+  --black-10: rgba(28, 28, 28, 10%);
+  --black-5: rgba(28, 28, 28, 5%);
+
+  --white-100: rgba(255, 255, 255, 100%);
+  --white-40: rgba(255, 255, 255, 40%);
+  --white-20: rgba(255, 255, 255, 20%);
+  --white-10: rgba(255, 255, 255, 10%);
+  --white-5: rgba(255, 255, 255, 5%);
+
+  --primary-light: rgb(247, 249, 251);
+  --primary-brand: rgba(28, 28, 28);
+  --primary-purple: rgb(229, 236, 246);
+  --primary-blue: rgb(227, 245, 255, 100);
+
+  --secondary-cyan: rgba(168, 197, 218);
+  --secondary-green: rgb(161, 227, 203);
+  --secondary-blue: rgb(177, 227, 255);
+  --secondary-indigo: rgb(149, 164, 252);
+  --secondary-mint: rgb(186, 237, 189);
 }
 
 * {
@@ -63,123 +113,33 @@ $green: #38cb89;
 @import "productCard";
 @import "loader";
 @import "NotFound";
+@import "fontSizes";
+@import "navbar";
+@import "acoordian";
 @import "admin-styles/dashboard";
 @import "admin-styles/products";
+@import "admin-styles/dashboard_home";
 @import "admin-styles/chart";
 @import "admin-styles/dashboardapp";
 @import "admin-styles/mediaquery";
 
 .container {
+  @include flex(column, stretch);
+  background-color: var(--white-100);
+  color: var(--black-100);
   width: 100%;
-  max-width: 1367px;
-  margin: auto;
+  height: calc(100vh - 52px);
+  padding: 0 2rem;
   overflow: auto;
   > h1 {
     @include heading;
-    padding: 1rem 0;
+    padding: 2rem 0;
     text-align: center;
-  }
-}
-.header {
-  position: relative;
-  padding: 0.5rem 12vw;
-  @include flex(row, space-between, center);
-  color: $gray;
-  .active {
-    color: $green;
-  }
-
-  
-  .icons {
-    @include flex(row, flex-end, center, 1.5rem);
-    .active {
-      color: $green;
-    }
-
-    a {
-      color: $gray;
-
-      &:hover {
-        color: $black;
-      }
-    }
-
-    button {
-      @include btn(0 0, transparent, hsl(200, 4%, 44%));
-      cursor: pointer;
-
-      &:hover {
-        color: $black;
-      }
-    }
-    dialog {
-      z-index: 99;
-      background-color: $colorl;
-      border: none;
-      padding: 10px;
-      width: 100px;
-      position: absolute;
-      border-radius: 5px;
-      left: calc(100vw - 13vw);
-      transform: translate(-50%);
-      top: 100%;
-      > div {
-        @include flex(column, flex-start, center, 0.25rem);
-      }
-    }
-  }
-
-
-  .logo{
-    >a{
-      font-size: 1.8rem;
-      font-weight: 600;
-      color: $black;
-    }
-    .active{
-      color: $green;
-    }
-  }
-}
-
-.admin-container {
-  @include grid(1fr 4fr, 2rem);
-  height: 90vh;
-  background-color: rgb(247, 247, 247);
-  > aside {
-    width: 100%;
-    background-color: white;
-    padding: 1rem;
-    z-index: 10;
-    overflow-y: auto;
-    &::-webkit-scrollbar {
-      display: none;
-    }
-
-    > div {
-      margin: 2rem 1rem;
-      > h5 {
-        @include heading(2px);
-        opacity: 0.8;
-        margin: 1rem 0;
-      }
-      > ul {
-        @include flex(column, unset, unset, 0.5rem);
-        list-style: none;
-        > li {
-          padding: 0.5rem 1rem;
-          border-radius: 10px;
-          a {
-            color: rgba(0, 0, 0, 0.825);
-            @include flex(row, unset);
-          }
-        }
-      }
-    }
   }
 }
 
 .table {
+  color: var(--black-100);
   border-collapse: collapse;
   width: 100%;
   th,
@@ -187,11 +147,12 @@ $green: #38cb89;
     padding: 8px;
     text-align: left;
     vertical-align: middle;
+    color: var(--black-100);
   }
 
   th {
     font-weight: bold;
-    color: #0000009e;
+    color: var(--black-40);
     font-size: 1.1rem;
     font-weight: 400;
     padding: 2rem 1rem;
@@ -199,7 +160,7 @@ $green: #38cb89;
 
   tbody {
     tr {
-      box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.093);
+      box-shadow: 0px 1px 1px var(--black-10);
     }
 
     td {
@@ -213,8 +174,8 @@ $green: #38cb89;
       }
       a {
         text-decoration: none;
-        background-color: rgba(44, 104, 255, 0.455);
-        color: rgba(44, 104, 255);
+        background-color: var(--black-100);
+        color: var(--white-100);
         padding: 0.25rem 0.5rem;
         border-radius: 10px;
       }
@@ -270,27 +231,35 @@ $green: #38cb89;
   cursor: pointer;
   color: $green;
   position: fixed;
-  top: 1rem;
+  top: 3rem;
   left: 1rem;
   font-size: 2rem;
   background-color: white;
   border-radius: 50%;
-  z-index: 9;
+  z-index: 434564;
 }
 
-#close-sidebar {
-  width: 80%;
-  margin: 1rem auto;
-  display: block;
-  padding: 0.75rem;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  background-color: rgb(168, 2, 2);
-  color: white;
-  border-radius: 10px;
+.close-sidebar {
+  position: fixed;
+  top: 4rem;
+  right: 0.5rem;
+  padding: 1.5rem;
+  background-color: var(--white-100);
+  display: flex;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border: 1px solid var(--black-10)
+
+
 }
 
+.nav-icon {
+  height: 1.75rem;
+  width: 1.75rem;
+  align-self: center;
+}
 .loader {
   width: 100%;
   height: 100vh;
@@ -316,3 +285,13 @@ $green: #38cb89;
     transform: translate(-50%, -20%);
   }
 }
+
+.dash-home-head {
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 2rem 0;
+  width: 100%;
+  color: var(--black-100);
+}
+
+

@@ -1,30 +1,25 @@
 import { onAuthStateChanged } from "firebase/auth";
-import { lazy, Suspense, useEffect } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import { Toaster } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Header from "./components/Header";
-import Loader from "./components/Loader";
 import ProtectedRoute from "./components/protectedRoute";
 import { auth } from "./firebase";
 import { getUser } from "./redux/api/userAPI";
 import { userExist, userNotExist } from "./redux/reducer/userSlice";
 import { RootState } from "./redux/store";
+import Loader from "./components/Loader";
+import Navbar from "./components/NavBar";
 const Home = lazy(() => import("./pages/Home"));
 const Cart = lazy(() => import("./pages/Cart"));
 const Search = lazy(() => import("./pages/Search"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
-
-{
-  /*Not logged in route */
-}
+// Not logged in route
 const Login = lazy(() => import("./pages/Login"));
 
-{
-  /*Logged in user routes*/
-}
-
+// Logged in user routes
 const Shipping = lazy(() => import("./pages/Shipping"));
 const Orders = lazy(() => import("./pages/Orders"));
 
@@ -51,21 +46,31 @@ const App = () => {
     (state: RootState) => state.userReducer
   );
   const dispatch = useDispatch();
+  
+  // Introduce loading state for auth
+  const [loadingAuthState, setLoadingAuthState] = useState(true);
+
   useEffect(() => {
-    onAuthStateChanged(auth, async (user) => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
         const data = await getUser(user.uid);
         dispatch(userExist(data.user));
       } else {
         dispatch(userNotExist());
       }
+      setLoadingAuthState(false); // Auth check complete
     });
-  }, []);
-  return loading ? (
-    <Loader />
-  ) : (
+
+    return () => unsubscribe(); // Clean up subscription
+  }, [dispatch]);
+
+  if (loadingAuthState || loading) {
+    return <Loader />; // Show loader while checking auth state
+  }
+
+  return (
     <Router>
-      <Header user={user} />
+      <Navbar user={user} />
       <Suspense fallback={<Loader />}>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -75,7 +80,7 @@ const App = () => {
           <Route
             path="/login"
             element={
-              <ProtectedRoute isAuthenticated={user ? false : true}>
+              <ProtectedRoute isAuthenticated={!user}>
                 <Login />
               </ProtectedRoute>
             }
@@ -83,19 +88,28 @@ const App = () => {
 
           {/* Logged in routes  */}
           <Route
-            element={<ProtectedRoute isAuthenticated={user ? true : false} />}
+            element={<ProtectedRoute isAuthenticated={!!user} />}
           >
             <Route path="/shipping" element={<Shipping />} />
             <Route path="/orders" element={<Orders />} />
           </Route>
 
           {/* Admin routes */}
-          <Route element={<ProtectedRoute isAuthenticated={user ? true : false} adminOnly={true} admin={user?.role === "admin" ? true : false}/>}>
-          <Route path="/admin/dashboard" element={<Dashboard />} />
-          <Route path="/admin/product" element={<Products />} />
-          <Route path="/admin/customer" element={<Customers />} />
-          <Route path="/admin/transaction" element={<Transaction />} />
+          <Route
+            element={
+              <ProtectedRoute
+                isAuthenticated={!!user}
+                adminOnly={true}
+                admin={user?.role === "admin"}
+              />
+            }
+          >
+            <Route path="/admin/dashboard" element={<Dashboard />} />
+            <Route path="/admin/product" element={<Products />} />
+            <Route path="/admin/customer" element={<Customers />} />
+            <Route path="/admin/transaction" element={<Transaction />} />
           </Route>
+
           {/* Charts */}
           <Route path="/admin/chart/bar" element={<Barcharts />} />
           <Route path="/admin/chart/pie" element={<Piecharts />} />
@@ -113,8 +127,9 @@ const App = () => {
             path="/admin/transaction/:id"
             element={<TransactionManagement />}
           />
+          
           {/* Catch all route */}
-          <Route path="*" element={<NotFound/>} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>
       <Toaster position="bottom-center" />

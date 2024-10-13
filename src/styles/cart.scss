@@ -1,13 +1,14 @@
 .cart{
     padding: 1rem 4rem;
     @include flex(row,stretch,space-between,4rem);
-    height: 90vh;
+    height: calc( 100vh - 3.8rem);
+    background-color: var(--white-100);
+    color:var(--black-100);
 
     >main{
         width: 70%;
         overflow-y: auto;
         >h1{
-            @include heading(2px);
             text-align: center;
         }
         &::-webkit-scrollbar{
@@ -22,17 +23,17 @@
 
         >input{
             padding: 1rem;
-            border:1px solid rgba(0,0,0,0.28);
+            border:1px solid var(--black-20);
             outline: none;
             border-radius: 5px;
-            margin-top: 2rem;
+            margin-top: 1rem;
+            background-color:var(--white-100);
         }
 
         >p{
             font-size: 1.1rem;
         }
         >a{
-            
             background-color: $green;
             padding: 1rem;
             text-decoration:none;
@@ -61,11 +62,11 @@
 
 
 .cart-item{
-    padding: 2rem;
+    padding: 1rem;
     @include flex(row,flex-start,center,3rem);
     >img{
         @include square(10rem);
-        object-fit: cover;
+        object-fit:contain;
         border-radius: 5px;
     }
 

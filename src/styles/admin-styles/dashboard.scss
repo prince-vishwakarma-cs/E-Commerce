@@ -1,0 +1,55 @@
+
+
+.admin-container {
+  display: grid;
+  grid-template-columns:1fr 4fr;
+  height: calc( 100vh - 51.2px);
+  background-color: var(--white-100);
+  > aside {
+    border-right: var(--black-10) 1px solid;
+    background-color: var(--white-100);
+    color: var(--black-100);
+    padding: 0.5rem;
+    z-index: 10;
+    overflow-y: hidden;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    > div {
+      margin: 2rem 1rem;
+      
+      > h5 {
+        font-weight: 400;
+        font-size: 1.1rem;
+        color: var(--black-40);
+        margin: 1rem 0;
+      }
+      > ul {
+        @include flex(column, unset, unset, 0.5rem);
+        list-style: none;
+        > li {
+          padding: 0.5rem 1rem;
+          border-radius: 10px;
+          
+          a {
+            color: var(--black-100);
+            @include flex(row, unset);
+             
+          }
+
+          &:hover{
+            background-color: var(--black-5);
+            a{
+                margin-left: 0.25rem;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.no-scroll{
+ overflow: hidden;
+}

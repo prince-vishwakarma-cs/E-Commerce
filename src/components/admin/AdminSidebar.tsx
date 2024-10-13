@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
+import { IconType } from "react-icons";
 import { AiFillFileText } from "react-icons/ai";
 import {
   FaChartBar,
   FaChartLine,
   FaChartPie,
 } from "react-icons/fa";
-import { HiMenuAlt4 } from "react-icons/hi";
 import { IoIosPeople } from "react-icons/io";
 import {
   RiCoupon3Fill,
@@ -13,12 +13,9 @@ import {
   RiShoppingBag3Fill,
 } from "react-icons/ri";
 import { Link, Location, useLocation } from "react-router-dom";
-import { IconType } from "react-icons";
 
 const AdminSidebar = () => {
   const location = useLocation();
-
-  const [showModal, setShowModal] = useState<boolean>(false);
   const [phoneActive, setPhoneActive] = useState<boolean>(
     window.innerWidth < 1100
   );
@@ -37,21 +34,15 @@ const AdminSidebar = () => {
 
   return (
     <>
-      {phoneActive && (
-        <button id="hamburger" onClick={() => setShowModal(true)}>
-          <HiMenuAlt4 />
-        </button>
-      )}
-
       <aside
         style={
           phoneActive
             ? {
                 width: "20rem",
-                height: "100%",
+                height: "calc(100vh - 3.8rem)",
                 position: "fixed",
-                top: 0,
-                left: showModal ? "0" : "-20rem",
+                top: "3.8rem",
+                left:  "0",
                 transition: "all 0.5s",
               }
             : {}
@@ -60,12 +51,6 @@ const AdminSidebar = () => {
         <DivOne location={location} />
         <DivTwo location={location} />
         <DivThree location={location} />
-
-        {phoneActive && (
-          <button id="close-sidebar" onClick={() => setShowModal(false)}>
-            Close
-          </button>
-        )}
       </aside>
     </>
   );
@@ -151,16 +136,16 @@ interface LiProps {
 }
 const Li = ({ url, text, location, Icon }: LiProps) => (
   <li
-    style={{
-      backgroundColor: location.pathname.includes(url)
-        ? "rgb(56, 203, 137,0.1)"
-        : "white",
-    }}
+    // style={{
+    //   backgroundColor: location.pathname.includes(url)
+    //     ? "rgb(56, 203, 137,0.1)"
+    //     : "white",
+    // }}
   >
     <Link
       to={url}
       style={{
-        color: location.pathname.includes(url) ? "rgb(56, 203, 137)" : "black",
+        color: location.pathname.includes(url) ? "rgb(56, 203, 137)" : "var(--black-100)",
       }}
     >
       <Icon />

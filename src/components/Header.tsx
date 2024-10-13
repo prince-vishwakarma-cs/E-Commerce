@@ -24,9 +24,8 @@ const Header = ({user}: PropsType) => {
   };
   return (
     <nav className="header">
-
       <div className="logo">
-      <NavLink onClick={() => setIsOpen(false)} to="/">3 <span className="black">legant</span><span className="lightgray">.</span></NavLink>
+      <NavLink onClick={() => setIsOpen(false)} to="/">3 <span style={{color:"var(--black-100)"}} >legant</span><span style={{color:"var(--black-40)"}}>.</span></NavLink>
       </div>
       <div className="icons">
       <NavLink onClick={() => setIsOpen(false)} to="/search"><Search/></NavLink>
