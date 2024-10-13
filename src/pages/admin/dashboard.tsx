@@ -7,7 +7,6 @@ import Loader from "../../components/Loader";
 import { useStatsQuery } from "../../redux/api/dashboardAPI";
 import { RootState } from "../../redux/store";
 import { Navigate } from "react-router-dom";
-import { useState } from "react";
 import { Bars3CenterLeftIcon } from "@heroicons/react/24/outline";
 import { setIsDashboardDrawer } from "../../redux/reducer/miscSlice";
 
