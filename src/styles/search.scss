@@ -72,6 +72,7 @@
 
     .filter-contain{
       display: none;
+      margin: 1rem 0;
     }
 
     > input {
@@ -139,6 +140,10 @@
 
     .filter-contain {
       display: block !important; // Try adding !important to ensure it's being applied.
+    }
+    main>input{
+      font-size: 1rem;
+      padding: 0.25rem 0;
     }
   }
 }

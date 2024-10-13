@@ -151,7 +151,7 @@ const NavHeader = ({ user }: PropsType) => {
             ) : (
               <div className="link-contain">
                 <Menu
-                  className="nav-icon"
+                  className="nav-icon nav-menu"
                   onClick={openDrawer}
                 />
               </div>
