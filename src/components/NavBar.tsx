@@ -10,7 +10,7 @@ import {
 } from "react-feather";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { NavLink} from "react-router-dom";
 import { auth } from "../firebase";
 import { setIsDrawer } from "../redux/reducer/miscSlice";
 import { RootState } from "../redux/store";
@@ -24,12 +24,8 @@ interface PropsType {
 const NavHeader = ({ user }: PropsType) => {
   const [extrasOpen, setExtrasOpen] = useState<boolean>(false);
   const { isDrawer } = useSelector((state: RootState) => state.misc);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isNavbarVisible, setIsNavbarVisible] = useState(true);
   const [lastScrollPos, setLastScrollPos] = useState(0);
-  const navigate = useNavigate(); // Hook for navigation
-
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const dispatch = useDispatch();
 
   // Handle scrolling direction
@@ -67,10 +63,6 @@ const NavHeader = ({ user }: PropsType) => {
     }
   };
 
-  const handleAccordionClick = (link: string) => {
-    setIsMenuOpen(false); // Close the menu
-    navigate(link); // Navigate to the link
-  };
 
   const openDrawer = () => {
     dispatch(setIsDrawer(true));

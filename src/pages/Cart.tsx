@@ -56,7 +56,7 @@ const Cart = () => {
           dispatch(calculatePrice());
           setValidCode(true);
         })
-        .catch((e) => {
+        .catch(() => {
           dispatch(discountApplied(0));
           dispatch(calculatePrice());
           setValidCode(false);
