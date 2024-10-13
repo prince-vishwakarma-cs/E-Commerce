@@ -53,3 +53,40 @@
 .no-scroll{
  overflow: hidden;
 }
+
+.bar {
+  height: 4rem;
+  @include flex(row, space-between, center);
+  padding: 0 1rem;
+  width: 100%;
+  border-bottom: 1px solid var(--black-10);
+  > div {
+    @include flex(row, unset, center);
+  }
+  .input-dash {
+    background-color: var(--black-5);
+    padding: 0 1rem;
+    border-radius: $border-radius;
+
+    > input {
+      @include inputStyle(100%, 1rem 0);
+      width: 12rem;
+      background-color: transparent;
+      color: var(--black-20);
+    }
+
+    > svg {
+      color: var(--black-40);
+    }
+  }
+  .info-dash {
+    > svg {
+      font-size: 1.2rem;
+      color: var(--black-40);
+    }
+    > img {
+      @include square(2rem);
+      border-radius: 50%;
+    }
+  }
+}

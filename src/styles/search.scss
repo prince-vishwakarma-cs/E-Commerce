@@ -1,7 +1,7 @@
 .search-page {
   padding: 1rem;
   @include flex(row, flex-start, stretch, 2rem);
-  height: calc( 100vh - 51.2px);
+  height: calc( 100vh - 3.8rem);
   position: relative;
   background-color: var(--white-100);
   color: var(--black-100);
@@ -44,6 +44,21 @@
     }
   }
 
+
+  .filter-sort{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    font-size: 0.85rem;
+    >div{
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      flex-grow: 1;
+    }
+
+  }
   > main {
     width: 100%;
     padding: 0 0.5rem;
@@ -55,8 +70,12 @@
       text-align: center;
     }
 
+    .filter-contain{
+      display: none;
+    }
+
     > input {
-      @include inputStyle(50%);
+      @include inputStyle(100%);
       margin: 1rem 0;
       font-size: 1.2rem;
       display: block;
@@ -106,6 +125,20 @@
           }
         }
       }
+    }
+  }
+}
+ 
+
+
+@media (max-width: 576px) {
+  .search-page {
+    aside {
+      display: none;
+    }
+
+    .filter-contain {
+      display: block !important; // Try adding !important to ensure it's being applied.
     }
   }
 }

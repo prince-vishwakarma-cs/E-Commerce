@@ -1,7 +1,7 @@
 import { ReactElement, useEffect, useState } from "react";
 import { Trash2 } from "react-feather";
 import toast from "react-hot-toast";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Column } from "react-table";
 import AdminSidebar from "../../components/admin/AdminSidebar";
 import TableHOC from "../../components/admin/TableHOC";
@@ -13,6 +13,8 @@ import {
 import { RootState } from "../../redux/store";
 import { customError } from "../../types/api-types";
 import { responseToast } from "../../utils/features";
+import { Bars3CenterLeftIcon } from "@heroicons/react/24/outline";
+import { setIsDashboardDrawer } from "../../redux/reducer/miscSlice";
 
 interface DataType {
   avatar: ReactElement;
@@ -58,6 +60,9 @@ const Customers = () => {
     const err = error as customError;
     toast.error(err.data.message);
   }
+
+  const dispatch = useDispatch()
+  const {isDashboardDrawer} = useSelector((state: RootState) => state.misc)
 
   const [rows, setRows] = useState<DataType[]>([]);
 
@@ -110,7 +115,8 @@ const Customers = () => {
 
   return (
     <div className="admin-container">
-      <AdminSidebar />
+      {isDashboardDrawer && <AdminSidebar />}
+      {isDashboardDrawer && <div className={`close-sidebar ${isDashboardDrawer ? "no-scroll" : ""}`}> <Bars3CenterLeftIcon className="nav-icon" onClick={()=> dispatch(setIsDashboardDrawer(false))}/></div>}
       <main>{isLoading ? <Loader /> : Table}</main>
     </div>
   );

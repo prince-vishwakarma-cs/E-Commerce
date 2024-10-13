@@ -3,6 +3,7 @@
   padding: 2rem;
   overflow: auto;
   @include square(100%);
+  width: 100%;
 }
 
 .create-product-btn {

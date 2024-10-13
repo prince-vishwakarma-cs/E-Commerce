@@ -1,6 +1,7 @@
 .productCard {
-  width: 100%; // Make the card width 100% of its container
+  width: 100%;
   max-width: 16.375rem; // Max width to control the size
+  min-width: 10rem; // Set a minimum width to prevent the card from shrinking too much
   @include flex(column, flex-start, flex-start, 0);
   aspect-ratio: 262 / 349;
   height: 100%;
@@ -11,7 +12,7 @@
     position: relative;
     display: flex;
     transition: all ease 0.3s;
-    width: 100%; 
+    width: 100%;
     height: 100%;
 
     > div {
@@ -67,5 +68,52 @@
 
   &:hover .productImageWrapper > div > button {
     display: block;
+  }
+
+  // Add responsiveness for smaller screens
+  @media (max-width: 768px) {
+    max-width: 14rem; // Reduce the max width for tablets
+    min-width: 8rem; // Reduce the minimum width for smaller screens
+
+    .productImageWrapper {
+      > div {
+        padding: 0.75rem; // Adjust padding on smaller screens
+
+        > div > img {
+          padding: 0.3rem; // Reduce padding for images
+        }
+
+        > button {
+          font-size: 0.75rem; // Adjust button size
+        }
+      }
+    }
+
+    .details {
+      font-size: 1rem; // Adjust font size for details
+    }
+  }
+
+  @media (max-width: 576px) {
+    max-width: 12rem; // Further reduce the max width for mobile screens
+    min-width: 6rem; // Further reduce the minimum width for small mobile screens
+
+    .productImageWrapper {
+      > div {
+        padding: 0.5rem; // Further reduce padding
+
+        > div > img {
+          padding: 0.2rem; // Reduce image padding on small screens
+        }
+
+        > button {
+          font-size: 0.7rem; // Adjust button size further for small screens
+        }
+      }
+    }
+
+    .details {
+      font-size: 0.9rem; // Further adjust font size for small screens
+    }
   }
 }

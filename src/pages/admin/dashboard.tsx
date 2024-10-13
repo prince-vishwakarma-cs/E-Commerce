@@ -1,5 +1,5 @@
 import { Bell, Search, TrendingDown, TrendingUp, Users } from "react-feather";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import AdminSidebar from "../../components/admin/AdminSidebar";
 import { BarChart, DoughnutChart } from "../../components/admin/Charts";
 import Table from "../../components/admin/DashboardTable";
@@ -9,14 +9,17 @@ import { RootState } from "../../redux/store";
 import { Navigate } from "react-router-dom";
 import { useState } from "react";
 import { Bars3CenterLeftIcon } from "@heroicons/react/24/outline";
+import { setIsDashboardDrawer } from "../../redux/reducer/miscSlice";
 
 const userImg =
   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJxA5cTf-5dh5Eusm0puHbvAhOrCRPtckzjA&usqp";
 
 const Dashboard = () => {
   const { user } = useSelector((state: RootState) => state.userReducer);
-  const [isOpen, setIsOpen] = useState(false); // State to manage sidebar open/close
   const { isLoading, data, isError } = useStatsQuery(user?._id!);
+  
+  const dispatch = useDispatch()
+  const {isDashboardDrawer} = useSelector((state: RootState) => state.misc)
 
   const stats = data?.stats!;
 
@@ -24,16 +27,16 @@ const Dashboard = () => {
 
   return (
     <div className="admin-container">
-      {isOpen && <AdminSidebar />}
+      {isDashboardDrawer && <AdminSidebar />}
       <main className="dashboard">
         {isLoading ? (
           <Loader />
         ) : (
           <>
             <div className="bar">
-             {isOpen && <div className={`close-sidebar ${isOpen ? "no-scroll" : ""}`}> <Bars3CenterLeftIcon className="nav-icon" onClick={()=> setIsOpen(false)}/></div>}
+             {isDashboardDrawer && <div className={`close-sidebar ${isDashboardDrawer ? "no-scroll" : ""}`}> <Bars3CenterLeftIcon className="nav-icon" onClick={()=> dispatch(setIsDashboardDrawer(false))}/></div>}
               <div className="info-dash">
-                <Bars3CenterLeftIcon className="nav-icon" onClick={()=> setIsOpen(true)}/>
+                <Bars3CenterLeftIcon className="nav-icon" onClick={()=> dispatch(setIsDashboardDrawer(true))}/>
                 <img src={user?.photo || userImg} alt="User" />
                 <Bell />
               </div>

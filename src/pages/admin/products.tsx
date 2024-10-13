@@ -1,8 +1,8 @@
 import { ReactElement, useEffect, useState } from "react";
-import { Loader } from "react-feather";
+import { Bell, Loader, Search } from "react-feather";
 import toast from "react-hot-toast";
 import { FaPlus } from "react-icons/fa";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Column } from "react-table";
 import AdminSidebar from "../../components/admin/AdminSidebar";
@@ -10,6 +10,8 @@ import TableHOC from "../../components/admin/TableHOC";
 import { useAllProductsQuery } from "../../redux/api/productAPI";
 import { RootState } from "../../redux/store";
 import { customError } from "../../types/api-types";
+import { setIsDashboardDrawer } from "../../redux/reducer/miscSlice";
+import { Bars3CenterLeftIcon } from "@heroicons/react/24/outline";
 
 interface DataType {
   photo: ReactElement;
@@ -45,9 +47,16 @@ const columns: Column<DataType>[] = [
 
 
 const Products = () => {
+  const userImg =
+  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJxA5cTf-5dh5Eusm0puHbvAhOrCRPtckzjA&usqp";
+
   const {user} = useSelector((state:RootState) => state.userReducer)
   const { data ,isLoading , isError,error} = useAllProductsQuery(user?._id!);
   const [rows, setRows] = useState<DataType[]>([]);
+
+
+  const dispatch = useDispatch()
+  const {isDashboardDrawer} = useSelector((state: RootState) => state.misc)
 
   if(isError) {
     const err=error as customError;
@@ -79,7 +88,20 @@ const Products = () => {
 
   return (
     <div className="admin-container">
-      <AdminSidebar />
+       {isDashboardDrawer && <AdminSidebar />}
+       <div className="bar">
+             {isDashboardDrawer && <div className={`close-sidebar ${isDashboardDrawer ? "no-scroll" : ""}`}> <Bars3CenterLeftIcon className="nav-icon" onClick={()=> dispatch(setIsDashboardDrawer(false))}/></div>}
+              <div className="info-dash">
+                <Bars3CenterLeftIcon className="nav-icon" onClick={()=> dispatch(setIsDashboardDrawer(true))}/>
+                <img src={user?.photo || userImg} alt="User" />
+                <Bell/>
+              </div>
+              <div className="input-dash">
+                <Search />
+                <input type="text" placeholder="Search for data, users, docs" />
+              </div>
+            </div>
+      {isDashboardDrawer && <div className={`close-sidebar ${isDashboardDrawer ? "no-scroll" : ""}`}> <Bars3CenterLeftIcon className="nav-icon" onClick={()=> dispatch(setIsDashboardDrawer(false))}/></div>}
       <main>{isLoading? <Loader/> : Table}</main>
       <Link to="/admin/product/new" className="create-product-btn">
         <FaPlus />

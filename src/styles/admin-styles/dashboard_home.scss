@@ -20,6 +20,7 @@
     }
   
     .bar {
+      width: 100vw;
       height: 4rem;
       @include flex(row, space-between, center);
       padding: 0 1rem;
