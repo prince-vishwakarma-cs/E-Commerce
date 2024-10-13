@@ -301,3 +301,13 @@ $green: #38cb89;
 }
 
 
+
+@media (max-width:576px){
+  .container{
+    padding: 0 1rem;
+
+    >h1{
+      padding: 1rem 0;
+    }
+  }
+}

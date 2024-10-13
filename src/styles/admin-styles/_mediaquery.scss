@@ -30,27 +30,18 @@
 @media screen and (width<= 768px) {
   .cart {
     display: block;
-    padding: 2rem;
+    padding: 1rem;
 
     > main {
       width: 100%;
     }
     > aside {
       width: 100%;
+      padding: 2rem 0;
     }
   }
 
-  .cartitem {
-    width: 100%;
-    > img {
-      width: 3rem;
-      height: 3rem;
-    }
-    > div {
-      flex-direction: column;
-      gap: 0;
-    }
-  }
+ 
 
   .product-search-page {
     display: block;

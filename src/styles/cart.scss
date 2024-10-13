@@ -19,6 +19,7 @@
     >aside{
         width: 30%;
         padding: 4rem;
+        
         @include flex(column,center,stretch,1.5rem);
 
         >input{
@@ -62,7 +63,6 @@
 
 
 .cart-item{
-    padding: 1rem;
     @include flex(row,flex-start,center,3rem);
     >img{
         @include square(10rem);
@@ -113,4 +113,20 @@
             color:red;
         }
     }
+}
+
+
+@media (max-width:576px){
+    .cart-item {
+        width: 100%;
+        padding: 1.5rem 0;
+        > img {
+          width: 3rem;
+          height: 3rem;
+        }
+      }
+
+      .cart>aside{
+        border-top: 2px solid var(--black-20);
+      }
 }
