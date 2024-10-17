@@ -96,7 +96,9 @@ const Transaction = () => {
   return (
     <div className="admin-container">
       <AdminSidebar />
+      <div className="dashboard">
       <main>{isLoading? <Loader/> : Table}</main>
+      </div>
     </div>
   );
 };

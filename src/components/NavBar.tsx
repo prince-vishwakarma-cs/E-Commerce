@@ -6,16 +6,18 @@ import {
   Search,
   ShoppingBag,
   User as UserIcon,
-  X
+  X,
 } from "react-feather";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink} from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { auth } from "../firebase";
 import { setIsDrawer } from "../redux/reducer/miscSlice";
 import { RootState } from "../redux/store";
 import { User } from "../types/types";
 import Accordion from "./Accordian";
+import ExpandableAccordion from "./ExpandableAccordian";
+import ButtonAccordian from "./AccordianButton";
 
 interface PropsType {
   user: User | null;
@@ -28,14 +30,13 @@ const NavHeader = ({ user }: PropsType) => {
   const [lastScrollPos, setLastScrollPos] = useState(0);
   const dispatch = useDispatch();
 
-  // Handle scrolling direction
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollPos = window.pageYOffset;
       if (currentScrollPos > lastScrollPos && currentScrollPos > 50) {
-        setIsNavbarVisible(false); // Scrolling down - hide navbar
+        setIsNavbarVisible(false);
       } else {
-        setIsNavbarVisible(true); // Scrolling up - show navbar
+        setIsNavbarVisible(true);
       }
       setLastScrollPos(currentScrollPos);
     };
@@ -43,8 +44,6 @@ const NavHeader = ({ user }: PropsType) => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollPos]);
-
-  // Prevent body scrolling when menu is open
   useEffect(() => {
     if (isDrawer) {
       document.body.classList.add("no-scroll");
@@ -55,6 +54,7 @@ const NavHeader = ({ user }: PropsType) => {
 
   const logoutHandler = async () => {
     setExtrasOpen(false);
+    dispatch(setIsDrawer(false));
     try {
       await signOut(auth);
       toast.success("Signed out Successfully");
@@ -68,10 +68,10 @@ const NavHeader = ({ user }: PropsType) => {
     setExtrasOpen(false);
   };
 
-  const closeDrawer =() =>{
+  const closeDrawer = () => {
     dispatch(setIsDrawer(false));
-    setExtrasOpen(false)
-  }
+    setExtrasOpen(false);
+  };
 
   return (
     <div
@@ -142,33 +142,90 @@ const NavHeader = ({ user }: PropsType) => {
           )}
           <div className="nav-header__icon-close">
             {isDrawer ? (
-              <div className="link-contain">
+              <div className="link-contain drawer-icon">
                 <X
                   className="nav-icon"
                   onClick={() => dispatch(setIsDrawer(false))}
                 />
               </div>
             ) : (
-              <div className="link-contain">
-                <Menu
-                  className="nav-icon nav-menu"
-                  onClick={openDrawer}
-                />
+              <div className="link-contain drawer-icon">
+                <Menu className="nav-icon nav-menu" onClick={openDrawer} />
               </div>
             )}
           </div>
         </div>
       </div>
-
       {isDrawer && (
         <div className={`nav-header__menu ${isDrawer ? "open" : ""}`}>
           <Accordion title="Search Product" link="/search" />
           <Accordion title="Manage Cart" link="/cart" />
           <Accordion title="Orders" link="/orders" />
           {user?.role === "admin" && (
-            <Accordion title="Dashboard" link="admin/dashboard" />
+            <ExpandableAccordion title="Dashboard">
+              {" "}
+              <ul className="dashboard-links">
+                <li>
+                  <div>Overview</div>
+                  <Link
+                    to="/admin/dashboard"
+                    onClick={() => dispatch(setIsDrawer(false))}
+                  >
+                    Main
+                  </Link>
+                  <Link
+                    to="/admin/product"
+                    onClick={() => dispatch(setIsDrawer(false))}
+                  >
+                    Products
+                  </Link>
+                  <Link
+                    to="/admin/customer"
+                    onClick={() => dispatch(setIsDrawer(false))}
+                  >
+                    Customer
+                  </Link>
+                  <Link
+                    to="/admin/transaction"
+                    onClick={() => dispatch(setIsDrawer(false))}
+                  >
+                    Transactions
+                  </Link>
+                </li>
+                <li>
+                  <div>Charts</div>
+                  <Link
+                    to="/admin/chart/bar"
+                    onClick={() => dispatch(setIsDrawer(false))}
+                  >
+                    Bar
+                  </Link>
+                  <Link
+                    to="/admin/chart/pie"
+                    onClick={() => dispatch(setIsDrawer(false))}
+                  >
+                    Pie
+                  </Link>
+                  <Link
+                    to="/admin/chart/line"
+                    onClick={() => dispatch(setIsDrawer(false))}
+                  >
+                    Line
+                  </Link>
+                </li>
+                <li>
+                  <div>Extras</div>
+                  <Link
+                    to="/admin/app/coupon"
+                    onClick={() => dispatch(setIsDrawer(false))}
+                  >
+                    Coupon
+                  </Link>
+                </li>
+              </ul>
+            </ExpandableAccordion>
           )}
-          <Accordion title="Logout" link="/" />
+          <ButtonAccordian title="Logout" onclick={logoutHandler}/>
         </div>
       )}
     </div>

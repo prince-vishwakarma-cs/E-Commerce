@@ -88,7 +88,8 @@ const Products = () => {
 
   return (
     <div className="admin-container">
-       {isDashboardDrawer && <AdminSidebar />}
+       {<AdminSidebar/>}
+       <div className ="dashboard">
        <div className="bar">
              {isDashboardDrawer && <div className={`close-sidebar ${isDashboardDrawer ? "no-scroll" : ""}`}> <Bars3CenterLeftIcon className="nav-icon" onClick={()=> dispatch(setIsDashboardDrawer(false))}/></div>}
               <div className="info-dash">
@@ -106,6 +107,7 @@ const Products = () => {
       <Link to="/admin/product/new" className="create-product-btn">
         <FaPlus />
       </Link>
+    </div>
     </div>
   );
 };

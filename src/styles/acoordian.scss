@@ -6,6 +6,8 @@
     &__header {
       display: flex;
       justify-content: end;
+      gap: 1rem;
+      color: rgb(70,70,70);
       align-items: center;
       cursor: pointer;
       padding: 0.5rem 0;

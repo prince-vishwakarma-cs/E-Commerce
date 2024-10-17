@@ -117,17 +117,19 @@ const Productmanagement = () => {
         ) : (
           <>
             <section>
+              <div>
               <strong>ID - {data?.product._id}</strong>
-              <img
-                src={photo}
-                alt="Product"
-              />
-              <p>{name}</p>
               {stock > 0 ? (
                 <span className="green">{stock} Available</span>
               ) : (
                 <span className="red"> Not Available</span>
               )}
+              </div>
+              <img
+                src={photo}
+                alt="Product"
+              />
+              <p>{name}</p>
               <h3>₹{price}</h3>
             </section>
             <article>

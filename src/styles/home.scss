@@ -20,7 +20,8 @@
 
   > .heading {
     padding: 1vw 12vw;
-    width: 100vw;
+    width: 100%;
+  
     @include flex(row, space-between, center);
     flex-wrap: wrap;
 
@@ -50,7 +51,8 @@
   }
 
   .showcase {
-    width: 100vw;
+    width: 100%;
+    overflow-x: auto;
     padding: 2vw 12vw;
     @include flex(row, space-between, center);
     flex-wrap: wrap;
@@ -183,12 +185,20 @@
       min-width: auto; // Remove the minimum width restriction for mobile
     }
 
-    .heading{
-      padding: 1rem;
+    .heading {
+      padding: 1vw 12vw;
+      width: 100%; // Change from 100vw to 100%
     }
-    .new-arrival{
-      padding: 1rem;
+    
+    .new-arrival {
+      padding: 0 12vw;
+      width: 100%; // Change from 100vw to 100%
     }
+    
+    .showcase {
+      width: 100%; // Change from 100vw to 100%
+    }
+    
 
     .features{
       padding: 1rem;
@@ -197,9 +207,7 @@
     footer{
       padding: 2rem 1rem;
     }
-    .showcase{
-      padding: 0 1rem;
-    }
+ 
 
     main{
       padding: 1rem 1rem 1rem 0;

@@ -81,9 +81,12 @@ const Customers = () => {
           avatar: (
             <img
               style={{
-                borderRadius: "50%",
+                borderRadius: "4rem",
+                width:"4rem",
+                height:"4rem",
+                overflow:"hidden",
               }}
-              src={i.photo}
+              src={i.photo || `https://avatar.iran.liara.run/username?username=${i.name}`}
               alt={i.name}
             />
           ),
@@ -115,9 +118,11 @@ const Customers = () => {
 
   return (
     <div className="admin-container">
-      {isDashboardDrawer && <AdminSidebar />}
+      <AdminSidebar/>
+      <div className="dashboard">
       {isDashboardDrawer && <div className={`close-sidebar ${isDashboardDrawer ? "no-scroll" : ""}`}> <Bars3CenterLeftIcon className="nav-icon" onClick={()=> dispatch(setIsDashboardDrawer(false))}/></div>}
       <main>{isLoading ? <Loader /> : Table}</main>
+      </div>
     </div>
   );
 };

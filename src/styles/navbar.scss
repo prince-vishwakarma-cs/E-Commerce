@@ -4,9 +4,7 @@
   transition: all 0.7s ease;
   max-height: 79.2px;
   position: relative;
-  top: 52;
-  left: 0;
-  right: 0;
+
   z-index: 9999;
   border-bottom: 0.05rem solid var(--black-40);
 
@@ -68,7 +66,6 @@
     }
   }
   .nav-header__icon-close {
-    display: flex;
     align-items: center;
     cursor: pointer;
   }
@@ -113,6 +110,9 @@
   cursor: pointer;
 }
 
+.drawer-icon{
+  display: none;
+}
 
 .no-scroll {
   overflow: hidden;
@@ -130,7 +130,7 @@
   transform: translateY(0); // Show navbar by returning to normal position
 }
 
-@media (max-width: 576px) {
+@media (max-width: 768px) {
   .nav-user,
   .nav-cart,
   .nav-search {
@@ -149,5 +149,38 @@
   border-radius: 0.25rem;
   &:hover{
     background-color: var(--black-10);
+  }
+}
+
+.dashboard-links{
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  list-style: none;
+  padding: 0.5rem;
+  gap: 1rem;
+  font-weight: 700;
+  >li{
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+    >div{
+      font-size: 1.2rem;
+      margin-bottom: 0.25rem;
+    }
+
+    >a{
+      font-size: 1rem;
+    }
+  
+  }
+  >li>a:hover{
+    color: $green;
+  }
+}
+
+@media (max-width:768px){
+  .drawer-icon{
+    display: block;
   }
 }

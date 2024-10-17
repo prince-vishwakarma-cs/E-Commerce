@@ -1,12 +1,16 @@
 .dashboard-app-container {
   background-color: var(--white-100);
-  padding: 4rem;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  width: calc(100vw - 20rem);
+  justify-content: center;
+  align-items: center;
   color: (--black-100);
 
   > section {
-    @include flex(column, center, center, 2rem);
+    @include flex(column, center, center, 1rem);
     height: 100%;
-
     .coupon-form {
       @include grid(2fr 1fr, 2rem);
       max-width: 30rem;
@@ -72,5 +76,12 @@
         @include flex;
       }
     }
+  }
+}
+
+
+@media (max-width:768px){
+  .dashboard-app-container{
+    width: 100vw;
   }
 }

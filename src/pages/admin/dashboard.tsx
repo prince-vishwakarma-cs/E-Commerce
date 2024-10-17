@@ -26,7 +26,7 @@ const Dashboard = () => {
 
   return (
     <div className="admin-container">
-      {isDashboardDrawer && <AdminSidebar />}
+      <AdminSidebar />
       <main className="dashboard">
         {isLoading ? (
           <Loader />
@@ -44,7 +44,6 @@ const Dashboard = () => {
                 <input type="text" placeholder="Search for data, users, docs" />
               </div>
             </div>
-
             <div className="widgets-dash">
               <div className="dash-home-head">Overview</div>
               <section className="widget-container">

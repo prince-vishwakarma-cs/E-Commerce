@@ -26,7 +26,7 @@ const Accordion = ({ title, children,link}: AccordionProps) => {
       </div>
       {children && isOpen && <div className="accordion__content">{children}</div>}
     </Link>
-  );
+  ); 
 };
 
 export default Accordion;

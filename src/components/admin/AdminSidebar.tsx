@@ -35,18 +35,18 @@ const AdminSidebar = () => {
   return (
     <>
       <aside
-        style={
-          phoneActive
-            ? {
-                width: "20rem",
-                height: "calc(100vh - 3.8rem)",
-                position: "fixed",
-                top: "3.8rem",
-                left:  "0",
-                transition: "all 0.5s",
-              }
-            : {}
-        }
+        // style={
+        //   phoneActive
+        //     ? {
+        //         width: "20rem",
+        //         height: "calc(100vh - 3.8rem)",
+        //         position: "fixed",
+        //         top: "3.8rem",
+        //         left:  "0",
+        //         transition: "all 0.5s",
+        //       }
+        //     : {}
+        // }
       >
         <DivOne location={location} />
         <DivTwo location={location} />

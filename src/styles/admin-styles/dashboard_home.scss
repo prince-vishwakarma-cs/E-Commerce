@@ -1,6 +1,7 @@
 .dashboard {
     overflow-y: auto;
     background-color: var(--white-100);
+    width: calc(100vw - 20rem);
     color: var(--black-100);
   
     &::-webkit-scrollbar {
@@ -19,50 +20,51 @@
       background-color: var(--white-100);
     }
   
-    .bar {
-      width: 100vw;
-      height: 4rem;
-      @include flex(row, space-between, center);
-      padding: 0 1rem;
-      border-bottom: 1px solid var(--black-10);
-      > div {
-        @include flex(row, unset, center);
-      }
-      .input-dash {
-        background-color: var(--black-5);
-        padding: 0 1rem;
-        border-radius: $border-radius;
+    // .bar {
+    //   width: 100vw;
+    //   height: 4rem;
+    //   @include flex(row, space-between, center);
+    //   padding: 0 1rem;
+    //   border-bottom: 1px solid var(--black-10);
+    //   > div {
+    //     @include flex(row, unset, center);
+    //   }
+    //   .input-dash {
+    //     background-color: var(--black-5);
+    //     padding: 0 1rem;
+    //     border-radius: $border-radius;
   
-        > input {
-          @include inputStyle(100%, 1rem 0);
-          width: 12rem;
-          background-color: transparent;
-          color: var(--black-20);
-        }
+    //     > input {
+    //       @include inputStyle(100%, 1rem 0);
+    //       width: 12rem;
+    //       background-color: transparent;
+    //       color: var(--black-20);
+    //     }
   
-        > svg {
-          color: var(--black-40);
-        }
-      }
-      .info-dash {
-        > svg {
-          font-size: 1.2rem;
-          color: var(--black-40);
-        }
-        > img {
-          @include square(2rem);
-          border-radius: 50%;
-        }
-      }
-    }
+    //     > svg {
+    //       color: var(--black-40);
+    //     }
+    //   }
+    //   .info-dash {
+    //     > svg {
+    //       font-size: 1.2rem;
+    //       color: var(--black-40);
+    //     }
+    //     > img {
+    //       @include square(2rem);
+    //       border-radius: 50%;
+    //     }
+    //   }
+    // }
   
     .widgets-dash {
       @include flex(column, flex-start, flex-start,0);
       padding: 2rem 2rem 2rem 2rem;
+      width: 100%;
       .widget-container {
-          width: 100%;
+        width: 100%;
         @include flex(row, space-between, stretch, 1.5rem);
-    
+        flex-wrap: wrap;
         .widget {
           flex-grow: 1;
           width: 16rem;
@@ -201,6 +203,24 @@
   
       .transaction-box {
         padding: 2rem;
+        width: 100%;
+        overflow-x: auto;
+
+        &::-webkit-scrollbar {
+          width: 6px;
+          height: 6px;
+        }
+        &::-webkit-scrollbar-thumb {
+          background-color: var(--black-40);
+          border-radius: 10px;
+        }
+        &::-webkit-scrollbar-thumb:hover {
+          background-color:var(--black-100);
+        }
+      
+        &::-webkit-scrollbar-track {
+          background-color: var(--white-100);
+        }
         > h2 {
           margin: 1.5rem 0 0 0;
           @include heading;
@@ -208,3 +228,10 @@
       }
     }
   }
+
+@media (max-width:768px){
+  .dashboard{
+    width: 100vw;
+  }
+}
+  

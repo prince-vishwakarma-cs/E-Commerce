@@ -9,11 +9,11 @@
 .create-product-btn {
   position: fixed;
   right: 2rem;
-  top: 2rem;
+  bottom: 2rem;
   @include square(2.5rem);
   @include flex(row, center, center, 0);
   border-radius: 50%;
-  background-color: var(--secondary-mint);
+  background-color: var(--secondary-indigo);
   color: var(--white-100);
   &:hover {
     opacity: 0.8;
@@ -29,20 +29,26 @@
   cursor: pointer;
   border: none;
   position: absolute;
-  top: -1.2rem;
-  right: -1.2rem;
+  // display: none;
+  top: 1rem;
+  right: 1rem;
 }
 
 .product-management {
-  @include flex(row, center, center);
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+  gap: 1rem;
   background-color: var(--white-100);
-
+  width: calc(100vw - 20rem);
+  height: calc(100vh - 3.8rem);
+  overflow-y: auto;
   > section {
     overflow-y: auto;
     color: var(--black-100);
     width: 100%;
-    height: 85vh;
-    max-width: 500px;
+    min-height: 100%;
+    overflow-y: auto;
     background-color: var(--primary-light);
     padding: 2rem;
     @include flex(column, unset, unset, 1rem);
@@ -51,6 +57,12 @@
 
     &::-webkit-scrollbar{
       display: none;
+    }
+
+    >div{
+      display:flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
     }
 
     > h2 {
@@ -68,6 +80,8 @@
     }
 
     > strong {
+      display: flex;
+      flex-wrap: wrap;
       font-weight: 300;
     }
 
@@ -90,7 +104,7 @@
 
   > article {
     color: var(--black-100);
-    height: 85vh;
+    height: 100%;
     padding: 2rem;
     width: 100%;
     max-width: 400px;
@@ -193,8 +207,10 @@
 }
 
 
-@media (max-width:576px) {
-  .dashboard-product-box{
-    padding: 1rem 0;
+
+@media (max-width:768px){
+
+  .product-management{
+    width: 100vw;
   }
 }
